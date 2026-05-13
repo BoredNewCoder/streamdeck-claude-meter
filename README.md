@@ -2,7 +2,7 @@
 
 Stream Deck plugin that displays live Claude API rate limit usage. Reads directly from your local Claude Code credentials — no API key configuration needed.
 
-Inspired by [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter).
+Inspired by [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter) by HermannBjorgvin.
 
 ## What it shows
 
@@ -54,6 +54,14 @@ Every 60 seconds the plugin:
 npm run build
 streamdeck restart io.github.borednewcoder.claudemeter
 ```
+
+## Credits & Licenses
+
+- Inspired by [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter) (HermannBjorgvin) — source of the `anthropic-ratelimit-unified-*` header technique
+- [@elgato/streamdeck](https://github.com/elgatosf/streamdeck) — MIT License (Elgato)
+- [esbuild](https://github.com/evanw/esbuild) — MIT License
+- [TypeScript](https://github.com/microsoft/TypeScript) — Apache 2.0 License (Microsoft)
+- This project uses no Anthropic-owned assets, fonts, or trademarks
 
 ## Notes
 
