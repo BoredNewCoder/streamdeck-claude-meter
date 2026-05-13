@@ -1,0 +1,19 @@
+{
+  "name": "io.github.borednewcoder.claudemeter.sdPlugin",
+  "version": "1.0.0",
+  "description": "Claude API rate limit monitor for Stream Deck",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/generate-icons.mjs && node scripts/build.mjs",
+    "link": "streamdeck link io.github.borednewcoder.claudemeter.sdPlugin",
+    "dev": "npm run build && npm run link"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "^2.1.0"
+  },
+  "devDependencies": {
+    "@elgato/cli": "^1.7.4",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.4.0"
+  }
+}

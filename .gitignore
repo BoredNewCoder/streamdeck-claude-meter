@@ -1,0 +1,4 @@
+node_modules/
+io.github.borednewcoder.claudemeter.sdPlugin/bin/
+io.github.borednewcoder.claudemeter.sdPlugin/imgs/
+*.streamDeckPlugin
