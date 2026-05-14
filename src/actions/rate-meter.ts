@@ -11,7 +11,7 @@ import { solidPNG, formatReset } from "../utils/render.js";
 type Settings = Record<string, never>;
 type ActionRef = WillAppearEvent<Settings>["action"];
 
-const POLL_INTERVAL_MS = 60_000;
+const POLL_INTERVAL_MS = 600_000;
 const BLACK_BG = solidPNG(0, 0, 0);
 
 @action({ UUID: "io.github.borednewcoder.claudemeter.ratemeter" })
