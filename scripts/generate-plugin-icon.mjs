@@ -9,11 +9,13 @@ const outDir = join(__dirname, "..", "io.github.borednewcoder.claudemeter.sdPlug
 
 const svg = readFileSync(svgPath, "utf8");
 
-for (const size of [72, 144]) {
-  const resvg = new Resvg(svg, { fitTo: { mode: "width", value: size } });
-  const png = resvg.render().asPng();
-  const suffix = size === 144 ? "@2x" : "";
-  const out = join(outDir, `plugin-default${suffix}.png`);
-  writeFileSync(out, png);
-  console.log(`wrote ${out} (${size}x${size})`);
+for (const name of ["plugin-default", "action-default"]) {
+  for (const size of [72, 144]) {
+    const resvg = new Resvg(svg, { fitTo: { mode: "width", value: size } });
+    const png = resvg.render().asPng();
+    const suffix = size === 144 ? "@2x" : "";
+    const out = join(outDir, `${name}${suffix}.png`);
+    writeFileSync(out, png);
+    console.log(`wrote ${out} (${size}x${size})`);
+  }
 }
