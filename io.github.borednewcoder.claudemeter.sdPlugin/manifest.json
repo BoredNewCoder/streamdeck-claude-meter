@@ -17,6 +17,7 @@
     }
   ],
   "Category": "Claude Meter",
+  "Author": "Christopher VanZetta",
   "CategoryIcon": "imgs/plugin-default",
   "CodePath": "bin/plugin.js",
   "Description": "Monitor Claude API rate limits on your Stream Deck. Press key to toggle 5H / 7D view.",

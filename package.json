@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Claude API rate limit monitor for Stream Deck",
   "private": true,
+  "author": "Christopher VanZetta",
   "scripts": {
     "build": "node scripts/generate-icons.mjs && node scripts/build.mjs",
     "link": "streamdeck link io.github.borednewcoder.claudemeter.sdPlugin",
