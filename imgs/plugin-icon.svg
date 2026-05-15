@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <!-- Background -->
+  <rect width="72" height="72" rx="14" fill="#0f0f1a"/>
+
+  <!-- Ears -->
+  <ellipse cx="21" cy="15" rx="7" ry="8" fill="#e85d1a"/>
+  <ellipse cx="51" cy="15" rx="7" ry="8" fill="#e85d1a"/>
+
+  <!-- Body blob -->
+  <ellipse cx="36" cy="32" rx="20" ry="21" fill="#e85d1a"/>
+
+  <!-- Eyes white -->
+  <ellipse cx="28.5" cy="28" rx="4.5" ry="5" fill="white"/>
+  <ellipse cx="43.5" cy="28" rx="4.5" ry="5" fill="white"/>
+
+  <!-- Pupils -->
+  <circle cx="29.5" cy="29" r="2.5" fill="#111"/>
+  <circle cx="44.5" cy="29" r="2.5" fill="#111"/>
+
+  <!-- Eye shine -->
+  <circle cx="30.5" cy="27" r="1" fill="white"/>
+  <circle cx="45.5" cy="27" r="1" fill="white"/>
+
+  <!-- Smile -->
+  <path d="M 27 36 Q 36 44 45 36" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Left arm -->
+  <path d="M 18 46 C 12 52 13 58 18 58" stroke="#e85d1a" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Right arm -->
+  <path d="M 54 46 C 60 52 59 58 54 58" stroke="#e85d1a" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Meter bar -->
+  <defs>
+    <linearGradient id="meterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#00e44a"/>
+      <stop offset="50%"  stop-color="#ffcc00"/>
+      <stop offset="100%" stop-color="#ff2222"/>
+    </linearGradient>
+    <clipPath id="meterClip">
+      <rect x="18" y="55" width="36" height="10" rx="5"/>
+    </clipPath>
+  </defs>
+
+  <rect x="18" y="55" width="36" height="10" rx="5" fill="#2a2a3a"/>
+  <rect x="18" y="55" width="36" height="10" fill="url(#meterGrad)" clip-path="url(#meterClip)"/>
+  <rect x="18" y="55" width="36" height="10" rx="5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+</svg>

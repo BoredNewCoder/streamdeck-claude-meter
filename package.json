@@ -5,7 +5,7 @@
   "private": true,
   "author": "Christopher VanZetta",
   "scripts": {
-    "build": "node scripts/generate-icons.mjs && node scripts/build.mjs",
+    "build": "node scripts/generate-icons.mjs && node scripts/generate-plugin-icon.mjs && node scripts/build.mjs",
     "link": "streamdeck link io.github.borednewcoder.claudemeter.sdPlugin",
     "dev": "npm run build && npm run link"
   },
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@elgato/cli": "^1.7.4",
+    "@resvg/resvg-js": "^2.6.2",
     "esbuild": "^0.25.0",
     "typescript": "^5.4.0"
   }
