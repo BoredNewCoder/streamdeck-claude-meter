@@ -6,17 +6,19 @@ Inspired by [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter) by Herma
 
 ## What it shows
 
-The key displays a horizontal meter bar plus both utilization percentages:
+The key displays a horizontal meter bar, both utilization percentages, and the active window's reset time:
 
 ```
+42m       ← time until active window resets
 5H:73%    ← 5-hour window utilization
 7D:12%    ← 7-day window utilization
 [████░░░]  ← color bar: green → yellow → red as usage rises
 ```
 
 - **Bar** fills left-to-right as usage increases; color shifts green → yellow → red
-- Press the key to toggle which window the bar tracks (5H ↔ 7D)
+- Press the key to toggle which window the bar and reset timer track (5H ↔ 7D)
 - Both percentages are always visible regardless of toggle
+- Reset timer shows `42m` for minutes, `2h` for hours, `now` when imminent
 - If the key shows `ERR / check / logs`, see [Troubleshooting](#troubleshooting)
 
 ## Prerequisites
