@@ -6,19 +6,17 @@ Inspired by [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter) by Herma
 
 ## What it shows
 
-The key displays three lines of text:
+The key displays a horizontal meter bar plus both utilization percentages:
 
 ```
-73%       ← utilization of your rate limit window
-5H        ← which window: 5H (5-hour) or 7D (7-day)
-42m       ← time until the window resets (minutes or hours)
+5H:73%    ← 5-hour window utilization
+7D:12%    ← 7-day window utilization
+[████░░░]  ← color bar: green → yellow → red as usage rises
 ```
 
-- **5H view** — 5-hour rolling window: `0%` = fully fresh, `100%` = limit hit
-- **7D view** — 7-day rolling window: same scale
-- Reset timer shows `42m` for minutes, `2h` for hours, `now` when reset is imminent
-- Press the key to toggle between 5H ↔ 7D views
-- Background is pure black; text is white
+- **Bar** fills left-to-right as usage increases; color shifts green → yellow → red
+- Press the key to toggle which window the bar tracks (5H ↔ 7D)
+- Both percentages are always visible regardless of toggle
 - If the key shows `ERR / check / logs`, see [Troubleshooting](#troubleshooting)
 
 ## Prerequisites
@@ -43,13 +41,13 @@ npm run dev
 1. Open Stream Deck software
 2. Find **Claude Meter** in the action list (right panel)
 3. Drag **Rate Meter** onto any key
-4. The key polls every **10 minutes** automatically — the first fetch runs immediately on appearance
+4. The key polls every **1 minute** automatically — the first fetch runs immediately on appearance
 5. Press the key to toggle 5H ↔ 7D view
 6. You can place the action on multiple keys; they all share one poll timer and stay in sync
 
 ## How it works
 
-Every 10 minutes the plugin:
+Every minute the plugin:
 1. Reads your OAuth token from `~/.claude/.credentials.json`
 2. Makes a minimal API call to `api.anthropic.com/v1/messages` (1 token, cheapest model)
 3. Reads rate limit headers from the response:
@@ -82,10 +80,6 @@ notepad "$env:APPDATA\Elgato\StreamDeck\logs\io.github.borednewcoder.claudemeter
 **Key stuck on `...`**
 
 The first poll hasn't completed yet. Wait a few seconds. If it never resolves, check the log file.
-
-**Key shows `0% / 5H / ?`**
-
-The reset timestamp header was missing from the API response. This is harmless — the utilization value is still accurate; the `?` just means the reset time couldn't be parsed.
 
 ---
 
