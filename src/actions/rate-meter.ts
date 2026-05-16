@@ -66,10 +66,11 @@ export class RateMeter extends SingletonAction<Settings> {
 
   private async renderKey(key: ActionRef, data: RateData): Promise<void> {
     const util = this.showWeekly ? data.weekUtil : data.fiveHUtil;
+    const reset = this.showWeekly ? data.weekReset : data.fiveHReset;
     const fiveHPct = Math.round(data.fiveHUtil * 100);
     const weekPct = Math.round(data.weekUtil * 100);
 
     await key.setImage(meterPNG(util));
-    await key.setTitle(`5H:${fiveHPct}%\n7D:${weekPct}%`);
+    await key.setTitle(`${formatReset(reset)}\n5H:${fiveHPct}%\n7D:${weekPct}%`);
   }
 }
