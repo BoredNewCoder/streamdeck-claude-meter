@@ -25,6 +25,64 @@ function pngChunk(type: string, data: Buffer): Buffer {
   return Buffer.concat([len, typeB, data, crcB]);
 }
 
+export function meterPNG(fraction: number, size = 72): string {
+  const clamp = Math.max(0, Math.min(1, fraction));
+
+  let r: number, g: number;
+  if (clamp <= 0.5) {
+    r = Math.round(210 * clamp * 2);
+    g = 210;
+  } else {
+    r = 210;
+    g = Math.round(210 * (1 - (clamp - 0.5) * 2));
+  }
+  const b = 0;
+
+  const margin = 3;
+  const barH = 10;
+  const barY = size - margin - barH;
+  const barW = size - margin * 2;
+  const fillW = Math.round(barW * clamp);
+
+  const pixels = Buffer.alloc(size * size * 3, 0);
+  for (let y = barY; y < barY + barH; y++) {
+    for (let x = margin; x < margin + barW; x++) {
+      const idx = (y * size + x) * 3;
+      const filled = x < margin + fillW;
+      pixels[idx]     = filled ? r : 30;
+      pixels[idx + 1] = filled ? g : 30;
+      pixels[idx + 2] = filled ? b : 30;
+    }
+  }
+
+  const sig = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+  const ihdr = Buffer.allocUnsafe(13);
+  ihdr.writeUInt32BE(size, 0);
+  ihdr.writeUInt32BE(size, 4);
+  ihdr[8] = 8; ihdr[9] = 2; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+
+  const stride = 1 + size * 3;
+  const rows = Buffer.allocUnsafe(size * stride);
+  for (let y = 0; y < size; y++) {
+    rows[y * stride] = 0;
+    for (let x = 0; x < size; x++) {
+      const src = (y * size + x) * 3;
+      const dst = y * stride + 1 + x * 3;
+      rows[dst]     = pixels[src];
+      rows[dst + 1] = pixels[src + 1];
+      rows[dst + 2] = pixels[src + 2];
+    }
+  }
+  const idat = deflateSync(rows);
+
+  return `data:image/png;base64,${Buffer.concat([
+    sig,
+    pngChunk("IHDR", ihdr),
+    pngChunk("IDAT", idat),
+    pngChunk("IEND", Buffer.alloc(0)),
+  ]).toString("base64")}`;
+}
+
 export function solidPNG(r: number, g: number, b: number, size = 72): string {
   const sig = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 

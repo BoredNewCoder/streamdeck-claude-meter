@@ -6,13 +6,13 @@ import {
   WillDisappearEvent,
 } from "@elgato/streamdeck";
 import { fetchRateLimits, RateData } from "../utils/anthropic.js";
-import { solidPNG, formatReset } from "../utils/render.js";
+import { meterPNG, formatReset } from "../utils/render.js";
 
 type Settings = Record<string, never>;
 type ActionRef = WillAppearEvent<Settings>["action"];
 
-const POLL_INTERVAL_MS = 600_000;
-const BLACK_BG = solidPNG(0, 0, 0);
+const POLL_INTERVAL_MS = 60_000;
+const EMPTY_BAR = meterPNG(0);
 
 @action({ UUID: "io.github.borednewcoder.claudemeter.ratemeter" })
 export class RateMeter extends SingletonAction<Settings> {
@@ -27,7 +27,7 @@ export class RateMeter extends SingletonAction<Settings> {
     if (this.lastData) {
       await this.renderKey(ev.action, this.lastData);
     } else {
-      await ev.action.setImage(BLACK_BG);
+      await ev.action.setImage(EMPTY_BAR);
       await ev.action.setTitle("...");
     }
 
@@ -58,7 +58,7 @@ export class RateMeter extends SingletonAction<Settings> {
       for (const key of this.keys) await this.renderKey(key, this.lastData);
     } catch {
       for (const key of this.keys) {
-        await key.setImage(solidPNG(60, 60, 60));
+        await key.setImage(EMPTY_BAR);
         await key.setTitle("ERR\ncheck\nlogs");
       }
     }
@@ -66,11 +66,10 @@ export class RateMeter extends SingletonAction<Settings> {
 
   private async renderKey(key: ActionRef, data: RateData): Promise<void> {
     const util = this.showWeekly ? data.weekUtil : data.fiveHUtil;
-    const reset = this.showWeekly ? data.weekReset : data.fiveHReset;
-    const label = this.showWeekly ? "7D" : "5H";
-    const pct = Math.round(util * 100);
+    const fiveHPct = Math.round(data.fiveHUtil * 100);
+    const weekPct = Math.round(data.weekUtil * 100);
 
-    await key.setImage(BLACK_BG);
-    await key.setTitle(`${pct}%\n${label}\n${formatReset(reset)}`);
+    await key.setImage(meterPNG(util));
+    await key.setTitle(`5H:${fiveHPct}%\n7D:${weekPct}%`);
   }
 }
