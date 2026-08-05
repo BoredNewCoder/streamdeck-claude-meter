@@ -129,3 +129,10 @@ streamdeck restart io.github.borednewcoder.claudemeter
 - The plugin UUID is `io.github.borednewcoder.claudemeter` — change this in `manifest.json`, `rate-meter.ts`, and `package.json` if you fork and redistribute
 - Currently Windows-only (manifest OS config); add `mac` entry to `manifest.json` for macOS support
 - Plugin logs at `%appdata%\Elgato\StreamDeck\logs\io.github.borednewcoder.claudemeter.log`
+
+
+## Support
+
+If this saved you time or you just want to say thanks:
+
+**Cash App:** [$CVanZetta](https://cash.app/$CVanZetta)
